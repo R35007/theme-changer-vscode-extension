@@ -1,0 +1,221 @@
+{
+	"name": "theme-changer",
+	"displayName": "Theme Changer",
+	"description": "Generate your favorite VSCode workbench Theme color Customizations",
+	"version": "0.0.1",
+	"publisher": "Thinker",
+	"engines": {
+		"vscode": "^1.60.0"
+	},
+	"keywords": [
+		"Theme Changer",
+		"Theme editor",
+		"Dynamic Theme",
+		"Theme color",
+		"vscode theme changer",
+		"color customizations",
+		"colorCustomizations",
+		"dynamic color customizations",
+		"dynamic theme changer",
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "sidebar-colorsView",
+					"title": "Theme Changer",
+					"icon": "images/theme-changer.svg"
+				}
+			]
+		},
+		"views": {
+			"sidebar-colorsView": [
+				{
+					"type": "webview",
+					"id": "themeChanger.sidebar-colorsView",
+					"name": "Theme Changer"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "themeChanger.addColor",
+				"category": "Theme Changer",
+				"title": "Add Color"
+			},
+			{
+				"command": "themeChanger.clearColors",
+				"category": "Theme Changer",
+				"title": "Clear Colors",
+				"icon": "$(clear-all)"
+			},
+			{
+				"command": "themeChanger.changeThemeColor",
+				"category": "Theme Changer",
+				"title": "Change Theme Color"
+			}
+		],
+		"configuration": {
+			"title": "Theme Changer",
+			"properties": {
+				"theme-changer.settings.path": {
+					"type": "string",
+					"default": "./.vscode/settings.json",
+					"examples": [
+						"./.vscode/settings.json"
+					],
+					"description": "Give VSCode Settings file path"
+				},
+				"theme-changer.settings.color": {
+					"type": "string",
+					"description": "Give Theme Primary Color"
+				},
+				"theme-changer.settings.colors": {
+					"type": "array",
+					"default": [
+						"#CC0044",
+						"#9C27B0",
+						"#007ACC",
+						"#388E3C",
+						"#F9A825",
+						"#CC5200",
+						"#CC0000"
+					],
+					"items": {
+						"type": "string"
+					},
+					"additionalItems": true,
+					"description": "Add your Favorite Theme Colors here."
+				},
+				"theme-changer.settings.theme": {
+					"type": "string",
+					"default": "Default Dark+",
+					"description": "Provide theme name to generate the Theme Colors"
+				},
+				"theme-changer.settings.colorCustomizations": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					},
+					"default": {
+						"activityBar.activeBackground": "15",
+						"activityBar.activeBorder": "",
+						"activityBar.background": "5",
+						"activityBar.dropBorder": "",
+						"activityBarBadge.background": "",
+						"badge.background": "",
+						"breadcrumb.activeSelectionForeground": "60",
+						"breadcrumb.focusForeground": "60",
+						"button.background": "",
+						"button.hoverBackground": "+10",
+						"editor.background": "0",
+						"editor.findMatchBackground": "40",
+						"editor.findMatchHighlightBackground": "25",
+						"editor.inactiveSelectionBackground": "20",
+						"editor.lineHighlightBackground": "15",
+						"editor.selectionBackground": "20",
+						"editor.selectionHighlightBackground": "20",
+						"editor.selectionHighlightBorder": "",
+						"editorBracketMatch.border": "",
+						"editorCursor.foreground": "60",
+						"editorGroup.dropBackground": "10",
+						"editorGroupHeader.tabsBackground": "10",
+						"editorIndentGuide.background": "10",
+						"editorLineNumber.activeForeground": "70",
+						"editorLink.activeForeground": "",
+						"notificationLink.foreground": "",
+						"focusBorder": "30",
+						"list.activeSelectionBackground": "20",
+						"list.highlightForeground": "",
+						"list.hoverBackground": "15",
+						"list.inactiveSelectionBackground": "15",
+						"menu.background": "10",
+						"menu.selectionBackground": "30",
+						"merge.currentContentBackground": "15",
+						"merge.currentHeaderBackground": "30",
+						"panelTitle.activeForeground": "60",
+						"progressBar.background": "",
+						"scrollbarSlider.activeBackground": "",
+						"scrollbarSlider.background": "20",
+						"scrollbarSlider.hoverBackground": "30",
+						"searchEditor.findMatchBackground": "25",
+						"selection.background": "20",
+						"settings.focusedRowBackground": "5",
+						"settings.focusedRowBorder": "20",
+						"settings.modifiedItemIndicator": "",
+						"settings.rowHoverBackground": "5",
+						"sideBar.background": "5",
+						"sideBar.border": "0",
+						"sideBarTitle.foreground": "60",
+						"statusBar.background": "",
+						"statusBar.noFolderBackground": "",
+						"symbolIcon.arrayForeground": "",
+						"symbolIcon.constructorForeground": "70",
+						"symbolIcon.functionForeground": "70",
+						"symbolIcon.methodForeground": "",
+						"symbolIcon.moduleForeground": "",
+						"symbolIcon.variableForeground": "60",
+						"tab.activeBackground": "20",
+						"tab.activeBorder": "",
+						"tab.activeModifiedBorder": "",
+						"tab.border": "20",
+						"tab.hoverBackground": "15",
+						"tab.inactiveBackground": "10",
+						"tab.inactiveModifiedBorder": "",
+						"terminal.foreground": "60",
+						"terminal.selectionBackground": "20",
+						"terminalCursor.foreground": "",
+						"textLink.foreground": "",
+						"textLink.activeForeground": "+10",
+						"titleBar.activeBackground": "15",
+						"toolbar.hoverBackground": "0",
+						"window.activeBorder": "-10"
+					},
+					"description": "Set vsCode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness"
+				}
+			}
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "themeChanger.clearColors",
+					"group": "navigation",
+					"when": "view == themeChanger.sidebar-colorsView"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.60.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"eslint": "^7.27.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.172",
+		"color": "^4.0.1",
+		"lodash": "^4.17.21"
+	}
+}
