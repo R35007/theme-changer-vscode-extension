@@ -2,8 +2,18 @@
 	"name": "theme-changer",
 	"displayName": "Theme Changer",
 	"description": "Generate your favorite VSCode workbench Theme color Customizations",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "Thinker",
+	"license": "MIT",
+	"icon": "images/theme-changer-logo.png",
+	"author": {
+		"name": "Sivaraman",
+		"email": "sendmsg2siva@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/R35007/vscode-theme-changer-extension"
+	},
 	"engines": {
 		"vscode": "^1.60.0"
 	},
@@ -16,7 +26,7 @@
 		"color customizations",
 		"colorCustomizations",
 		"dynamic color customizations",
-		"dynamic theme changer",
+		"dynamic theme changer"
 	],
 	"categories": [
 		"Other"
