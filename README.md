@@ -19,7 +19,7 @@ This extension contributes the following settings:
 - `theme-changer.settings.theme`: give the theme name to generate the colors.
   - `Default` is set to `'Default Dark+'`
 - `theme-changer.settings.colors`: add your favorite theme colors here.
-  - `Default` colors are `["#CC0044","#9C27B0","#007ACC","#388E3C","#F9A825","#CC5200","#CC0000"]`
+  - `Default` colors are `["#FF1A66","#9C27B0","#007ACC","#388E3C","#CC7E00","#CC5200","#CC0000"]`
 - `theme-changer.settings.colorCustomizations` - helps to set your color customizations lightness.
   - `Default` colorCustomizations
 
@@ -49,7 +49,7 @@ This extension contributes the following settings:
   "editorGroupHeader.tabsBackground": "10",
   "editorIndentGuide.background": "10",
   "editorLineNumber.activeForeground": "70",
-  "editorLink.activeForeground": "",
+  "editorLink.activeForeground": "70",
   "notificationLink.foreground": "",
   "focusBorder": "30",
   "list.activeSelectionBackground": "20",
