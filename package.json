@@ -2,7 +2,7 @@
 	"name": "theme-changer",
 	"displayName": "Theme Changer",
 	"description": "Generate your favorite VSCode workbench Theme color Customizations",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "Thinker",
 	"license": "MIT",
 	"icon": "images/theme-changer-logo.png",
@@ -90,11 +90,11 @@
 				"theme-changer.settings.colors": {
 					"type": "array",
 					"default": [
-						"#CC0044",
+						"#FF1A66",
 						"#9C27B0",
 						"#007ACC",
 						"#388E3C",
-						"#F9A825",
+						"#CC7E00",
 						"#CC5200",
 						"#CC0000"
 					],
