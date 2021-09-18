@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.2
+
+- changed editor link color lightness to 70
+
 ## v1.0.1
 
 - updated colors list
