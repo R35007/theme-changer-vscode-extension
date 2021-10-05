@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { Settings } from './Settings';
 import { StatusbarUi } from './StatusBarUI';
@@ -30,28 +29,28 @@ export class ThemeChanger {
   }
 
   changeTheme(color: string) {
-    const settingsPath = Settings.path;
-    if (!settingsPath) {
-      return vscode.window.showErrorMessage(
-        'Please provide the settings.json file path in `theme-changer.settings.path`'
-      );
-    }
-
-    const generatedThemeColors = Object.entries(Settings.colorCustomizations).reduce(
+    const generatedThemeColors = Object.entries(Settings.colorRangeCustomization).reduce(
       (res, [key, val]) => ({ ...res, [key]: eval(`this.getColor('${color}', '${val || ''}')`) }),
       {}
     );
 
-    delete require.cache[settingsPath];
-    const settings = require(settingsPath);
+    const existingThemeColors = Settings.colorCustomizations;
+    let updatedThemeColors = existingThemeColors;
 
-    const themePath = Settings.theme?.length
-      ? `['workbench.colorCustomizations']['[${Settings.theme}]']`
-      : `['workbench.colorCustomizations']`;
-    const existingThemeColors = _.get(settings, themePath, {});
-
-    _.set(settings, themePath, { ...existingThemeColors, ...generatedThemeColors });
-
-    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+    if (Settings.theme) {
+      updatedThemeColors = {
+        ...existingThemeColors,
+        [`[${Settings.theme}]`]: {
+          ...existingThemeColors[Settings.theme],
+          ...generatedThemeColors,
+        },
+      };
+    } else {
+      updatedThemeColors = {
+        ...existingThemeColors,
+        ...generatedThemeColors,
+      };
+    }
+    Settings.colorCustomizations = updatedThemeColors;
   }
 }

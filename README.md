@@ -8,8 +8,6 @@ Generate your favorite VSCode workbench Theme color Customizations
 
 This extensions helps to save your favorite Theme primary color and generates the `workbench.colorCustomizations` colors from the selected primary theme color.
 
-> Note: This extension will directly update the `settings.json` file. Please make sure the file is a valid json formate and no comments in it.
-
 ## Extension Settings
 
 This extension contributes the following settings:

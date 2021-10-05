@@ -1,5 +1,11 @@
 # Change Log
 
+## v2.0.0
+
+- removed `theme-changer.settings.settingsPath`
+- renamed `theme-changer.settings.colorCustomizations` to `theme-changer.settings.colorRangeCustomizations`
+- added `theme-changer.settings.setAsGlobalTheme` - If true it update the theme color globally else it sets to the workspacefolder
+
 ## v1.0.2
 
 - changed editor link color lightness to 70

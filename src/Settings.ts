@@ -1,50 +1,64 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
-import * as fs from 'fs';
 
 export class Settings {
-  static get configuration() {
-    return vscode.workspace.getConfiguration('theme-changer.settings');
+  static get workbench() {
+    return vscode.workspace.getConfiguration('workbench');
   }
-  static getSettings(val: string) {
-    return Settings.configuration.get(val);
+  static getWorkbench(key: string) {
+    return Settings.workbench.get(key);
   }
-  static setSettings(key: string, val: any, isGlobal = true) {
-    return Settings.configuration.update(key, val, isGlobal);
-  }
-  static get path() {
-    const pathStr = Settings.getSettings('path') as string;
-    const settingsPath = Settings.getValidPath(pathStr || './.vscode/settings.json');
-    if (settingsPath) {
-      const stats = fs.statSync(settingsPath);
-      if (stats.isFile()) return settingsPath;
-    }
-  }
-  static get color() {
-    return (Settings.getSettings('color') as string) || '#FF6700';
-  }
-  static set color(value: string) {
-    Settings.setSettings('color', value);
-  }
-  static get colors() {
-    return (Settings.getSettings('colors') as string[]) || ['#FF6700', '#D52B1E', '#3DC2FF', '#9C2780', '#3F5185'];
-  }
-  static set colors(value: string[]) {
-    Settings.setSettings('colors', value) || '#FF6700';
+  static setWorkbench(key: string, val: any, isGlobal = false) {
+    return Settings.workbench.update(key, val, isGlobal);
   }
   static get colorCustomizations() {
-    return Settings.getSettings('colorCustomizations') as object;
+    return (Settings.getWorkbench('colorCustomizations') as { [key: string]: any }) || {};
   }
-  static set colorCustomizations(value: object) {
-    Settings.setSettings('colorCustomizations', value);
-  }
-  static get theme() {
-    return Settings.getSettings('theme') as string;
+  static set colorCustomizations(value: { [key: string]: any }) {
+    Settings.setWorkbench('colorCustomizations', value, Settings.isGlobalTheme);
   }
 
-  static getValidPath(relativePath: string, rootPath?: string) {
-    const root = rootPath || vscode.workspace.workspaceFolders?.[0]?.uri?.fsPath || './';
-    const resolvedPath = path.resolve(root, relativePath?.trim());
-    if (fs.existsSync(resolvedPath)) return resolvedPath;
+  static get themeChangerConfiguration() {
+    return vscode.workspace.getConfiguration('theme-changer.settings');
+  }
+  static getThemeChangerSetttings(val: string) {
+    return Settings.themeChangerConfiguration.get(val);
+  }
+  static setThemeChangerSetttings(key: string, val: any, isGlobal = true) {
+    return Settings.themeChangerConfiguration.update(key, val, isGlobal);
+  }
+  static get isGlobalTheme() {
+    return Settings.getThemeChangerSetttings('setAsGlobalTheme') as boolean;
+  }
+  static set isGlobalTheme(value: boolean) {
+    Settings.setThemeChangerSetttings('setAsGlobalTheme', value);
+  }
+  static get color() {
+    return (Settings.getThemeChangerSetttings('color') as string) || '#FF6700';
+  }
+  static set color(value: string) {
+    Settings.setThemeChangerSetttings('color', value);
+  }
+  static get colors() {
+    return (
+      (Settings.getThemeChangerSetttings('colors') as string[]) || [
+        '#FF6700',
+        '#D52B1E',
+        '#3DC2FF',
+        '#9C2780',
+        '#3F5185',
+      ]
+    );
+  }
+  static set colors(value: string[]) {
+    Settings.setThemeChangerSetttings('colors', value) || '#FF6700';
+  }
+  static get colorRangeCustomization() {
+    return Settings.getThemeChangerSetttings('colorRangeCustomizations') as object;
+  }
+  static set colorRangeCustomization(value: object) {
+    Settings.setThemeChangerSetttings('colorRangeCustomizations', value);
+  }
+  static get theme() {
+    return Settings.getThemeChangerSetttings('theme') as string;
   }
 }

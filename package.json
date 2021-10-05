@@ -2,7 +2,7 @@
 	"name": "theme-changer",
 	"displayName": "Theme Changer",
 	"description": "Generate your favorite VSCode workbench Theme color Customizations",
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"publisher": "Thinker",
 	"license": "MIT",
 	"icon": "images/theme-changer-logo.png",
@@ -75,13 +75,10 @@
 		"configuration": {
 			"title": "Theme Changer",
 			"properties": {
-				"theme-changer.settings.path": {
-					"type": "string",
-					"default": "./.vscode/settings.json",
-					"examples": [
-						"./.vscode/settings.json"
-					],
-					"description": "Give VSCode Settings file path"
+				"theme-changer.settings.setAsGlobalTheme": {
+					"type": "boolean",
+					"default": true,
+					"description": "If true it update the theme color globally else it sets to the workspacefolder"
 				},
 				"theme-changer.settings.color": {
 					"type": "string",
@@ -90,13 +87,12 @@
 				"theme-changer.settings.colors": {
 					"type": "array",
 					"default": [
-						"#FF1A66",
-						"#9C27B0",
 						"#007ACC",
+						"#333333",
 						"#388E3C",
-						"#CC7E00",
+						"#9C27B0",
 						"#CC5200",
-						"#CC0000"
+						"#CC7E00"
 					],
 					"items": {
 						"type": "string"
@@ -109,7 +105,7 @@
 					"default": "Default Dark+",
 					"description": "Provide theme name to generate the Theme Colors"
 				},
-				"theme-changer.settings.colorCustomizations": {
+				"theme-changer.settings.colorRangeCustomizations": {
 					"type": "object",
 					"additionalProperties": {
 						"type": "string"

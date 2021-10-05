@@ -40,6 +40,10 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
           this.setColors(data.value);
           break;
         }
+        case 'set-as-global-theme': {
+          Settings.isGlobalTheme = data.value;
+          break;
+        }
       }
     });
   }
@@ -122,9 +126,16 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
 				<ul id="color-list" class="color-list">
 				</ul>
 				<button id="add-color-button" class="add-color-button">Add Color</button>
+        <div class="d-flex align-items-center">
+          <label class="checkbox-container">
+            <input id="set-as-global-theme" class="checkbox" type="checkbox" ${Settings.isGlobalTheme ? 'checked' : ''}>
+            <span class="checkmark"></span>
+          </label>
+         <span class="text-gray">Set as Global Theme</span>
+        </div>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 				<script nonce="${nonce}">
-          init(${JSON.stringify(Settings.colors)}, '${Settings.color}')
+          init(${JSON.stringify(Settings.colors)})
         </script>
 			</body>
 			</html>`;

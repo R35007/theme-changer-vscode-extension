@@ -123,3 +123,68 @@ body {
   margin-left: 0.2rem;
   margin-right: 0.2rem;
 }
+
+/* Custom Checkbox */
+.checkbox-container {
+  position: relative;
+  height: 1.4rem;
+  width: 1.4rem;
+  display: inline-block;
+  margin-right: 0.6rem;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.2rem;
+  height: 1.4rem;
+  width: 1.4rem;
+  background-color: var(--vscode-checkbox-background);
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  opacity: 0.9;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--vscode-button-background);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 0.53rem;
+  top: 0.26rem;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
