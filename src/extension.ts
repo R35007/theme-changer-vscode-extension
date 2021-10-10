@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
+import { ADD_COLOR, CHANGE_THEME_COLOR, CLEAR_COLORS, RESET_THEME } from './enum';
 import { SidebarColorsView } from './SidebarColorsView';
-import { ADD_COLOR, CHANGE_THEME_COLOR, CLEAR_COLORS } from './enum';
-import { ThemeChanger } from './theme-changer';
 import { StatusbarUi } from './StatusBarUI';
+import { ThemeChanger } from './theme-changer';
 
 export function activate(context: vscode.ExtensionContext) {
   const themeChanger = new ThemeChanger();
@@ -21,6 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Clear Colors
   context.subscriptions.push(vscode.commands.registerCommand(CLEAR_COLORS, () => sidebarColorsView.clearColors()));
+
+  // Rest to VsCode default theme. Clears all generated theme colors
+  context.subscriptions.push(vscode.commands.registerCommand(RESET_THEME, () => sidebarColorsView.resetTheme()));
 
   // Show status bar
   context.subscriptions.push(StatusbarUi.statusBarItem);

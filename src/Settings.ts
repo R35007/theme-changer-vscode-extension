@@ -7,14 +7,14 @@ export class Settings {
   static getWorkbench(key: string) {
     return Settings.workbench.get(key);
   }
-  static setWorkbench(key: string, val: any, isGlobal = false) {
-    return Settings.workbench.update(key, val, isGlobal);
+  static setWorkbench(key: string, val: any, isUser = false) {
+    return Settings.workbench.update(key, val, isUser);
   }
   static get colorCustomizations() {
     return (Settings.getWorkbench('colorCustomizations') as { [key: string]: any }) || {};
   }
   static set colorCustomizations(value: { [key: string]: any }) {
-    Settings.setWorkbench('colorCustomizations', value, Settings.isGlobalTheme);
+    Settings.setWorkbench('colorCustomizations', value, Settings.isUserTheme);
   }
 
   static get themeChangerConfiguration() {
@@ -23,17 +23,17 @@ export class Settings {
   static getThemeChangerSetttings(val: string) {
     return Settings.themeChangerConfiguration.get(val);
   }
-  static setThemeChangerSetttings(key: string, val: any, isGlobal = true) {
-    return Settings.themeChangerConfiguration.update(key, val, isGlobal);
+  static setThemeChangerSetttings(key: string, val: any, isUser = true) {
+    return Settings.themeChangerConfiguration.update(key, val, isUser);
   }
-  static get isGlobalTheme() {
-    return Settings.getThemeChangerSetttings('setAsGlobalTheme') as boolean;
+  static get isUserTheme() {
+    return Settings.getThemeChangerSetttings('setAsUserTheme') as boolean;
   }
-  static set isGlobalTheme(value: boolean) {
-    Settings.setThemeChangerSetttings('setAsGlobalTheme', value);
+  static set isUserTheme(value: boolean) {
+    Settings.setThemeChangerSetttings('setAsUserTheme', value);
   }
   static get color() {
-    return (Settings.getThemeChangerSetttings('color') as string) || '#FF6700';
+    return Settings.getThemeChangerSetttings('color') as string;
   }
   static set color(value: string) {
     Settings.setThemeChangerSetttings('color', value);
@@ -52,11 +52,14 @@ export class Settings {
   static set colors(value: string[]) {
     Settings.setThemeChangerSetttings('colors', value) || '#FF6700';
   }
-  static get colorRangeCustomization() {
+  static get colorRangeCustomizations() {
     return Settings.getThemeChangerSetttings('colorRangeCustomizations') as object;
   }
-  static set colorRangeCustomization(value: object) {
+  static set colorRangeCustomizations(value: object) {
     Settings.setThemeChangerSetttings('colorRangeCustomizations', value);
+  }
+  static get overrideDefaultColorRange() {
+    return Settings.getThemeChangerSetttings('overrideDefaultColorRange') as Boolean;
   }
   static get theme() {
     return Settings.getThemeChangerSetttings('theme') as string;

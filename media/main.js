@@ -29,9 +29,9 @@ const getColorNode = (color, index) => {
     return (`
     <li class="color-entry">
         <input id="color-picker-${index}" type="color" class="color-picker h-100" value="${color}" data-index="${index}">
-        <input id="color-input-${index}" type="text" class="color-input" value="${color}" data-index="${index}">
-        <button id="color-select-btn-${index}" class="color-select-btn" data-index="${index}">Select</button>
-        <button id="color-remove-btn-${index}" class="color-remove-btn" data-index="${index}">x</button>
+        <vscode-text-field id="color-input-${index}" class="flex-1 color-input" value="${color}" data-index="${index}"></vscode-text-field>
+        <vscode-button id="color-remove-btn-${index}" appearance="secondary" class="color-remove-btn" data-index="${index}">x</vscode-button>
+        <vscode-button id="color-select-btn-${index}" appearance="primary" class="color-select-btn" data-index="${index}">Select</vscode-button>
     </li>
 `)
 }
@@ -40,8 +40,10 @@ const updateColorsList = (colors) => {
     const ul = document.getElementById("color-list");
     const colorsList = colors.map(getColorNode)
     ul.innerHTML = colorsList.join('');
+    addEventListeners();
+}
 
-
+const addEventListeners = () => {
     // on Color picker color change handler
     document.querySelectorAll(".color-picker").forEach(item => {
         item.addEventListener('change', event => {
@@ -61,7 +63,6 @@ const updateColorsList = (colors) => {
         })
     })
 
-
     // on Color select button click Handler
     document.querySelectorAll(".color-select-btn").forEach(item => {
         item.addEventListener('click', event => selectColor(event?.target?.dataset?.index))
@@ -73,16 +74,27 @@ const updateColorsList = (colors) => {
     })
 
     // On Add Color Button Click handler
-    document.getElementById('add-color-button').addEventListener('click', addColor);
+    document.getElementById('color-add-btn').addEventListener('click', addColor);
 
-    // On Set as Global Theme Checkbox check
-    document.getElementById('set-as-global-theme').addEventListener('change', function () { setAsGlobalTheme(this.checked) });
+    // On Set as User Theme Checkbox check
+    document.getElementById('user-theme-checkbox').addEventListener('change', function () { setAsUserTheme(this.checked) });
 
+    // Reset to Vscode Default Theme - Clears all generated theme colors
+    document.getElementById('reset-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        resetTheme()
+    });
 }
 
-// Set as Global Theme
-const setAsGlobalTheme = (isGlobalTheme) => {
-    vscode.postMessage({ type: 'set-as-global-theme', value: isGlobalTheme });
+// Clear all generated Theme Colors
+const resetTheme = () => {
+    console.log("Reset Theme clicked");
+    vscode.postMessage({ type: 'reset-theme' });
+}
+
+// Set as User Theme
+const setAsUserTheme = (isUserTheme) => {
+    vscode.postMessage({ type: 'is-user-theme', value: isUserTheme });
 }
 
 // Clear All Colors
