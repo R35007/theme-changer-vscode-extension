@@ -2,7 +2,7 @@
 	"name": "theme-changer",
 	"displayName": "Theme Changer",
 	"description": "Generate your favorite VSCode workbench Theme color Customizations",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"publisher": "Thinker",
 	"license": "MIT",
 	"icon": "images/theme-changer-logo.png",
@@ -70,29 +70,34 @@
 				"command": "themeChanger.changeThemeColor",
 				"category": "Theme Changer",
 				"title": "Change Theme Color"
+			},
+			{
+				"command": "themeChanger.resetTheme",
+				"category": "Theme Changer",
+				"title": "Reset Theme to VSCode Default"
 			}
 		],
 		"configuration": {
 			"title": "Theme Changer",
 			"properties": {
-				"theme-changer.settings.setAsGlobalTheme": {
+				"theme-changer.settings.setAsUserTheme": {
 					"type": "boolean",
 					"default": true,
-					"description": "If true it update the theme color globally else it sets to the workspacefolder"
+					"description": "Set to true to update the theme color in user settings else it sets to the workspace folder settings."
 				},
 				"theme-changer.settings.color": {
 					"type": "string",
-					"description": "Give Theme Primary Color"
+					"description": "Sets current selected Color here."
 				},
 				"theme-changer.settings.colors": {
 					"type": "array",
 					"default": [
 						"#007ACC",
-						"#333333",
-						"#388E3C",
-						"#9C27B0",
+						"#008006",
+						"#6C0080",
 						"#CC5200",
-						"#CC7E00"
+						"#CC7E00",
+						"#4D4D4D"
 					],
 					"items": {
 						"type": "string"
@@ -103,88 +108,20 @@
 				"theme-changer.settings.theme": {
 					"type": "string",
 					"default": "Default Dark+",
-					"description": "Provide theme name to generate the Theme Colors"
+					"description": "Provide theme name to generate the Theme Colors, Leave it empty to generate as a global theme."
 				},
 				"theme-changer.settings.colorRangeCustomizations": {
 					"type": "object",
 					"additionalProperties": {
 						"type": "string"
 					},
-					"default": {
-						"activityBar.activeBackground": "15",
-						"activityBar.activeBorder": "",
-						"activityBar.background": "5",
-						"activityBar.dropBorder": "",
-						"activityBarBadge.background": "",
-						"badge.background": "",
-						"breadcrumb.activeSelectionForeground": "60",
-						"breadcrumb.focusForeground": "60",
-						"button.background": "",
-						"button.hoverBackground": "+10",
-						"editor.background": "0",
-						"editor.findMatchBackground": "40",
-						"editor.findMatchHighlightBackground": "25",
-						"editor.inactiveSelectionBackground": "20",
-						"editor.lineHighlightBackground": "15",
-						"editor.selectionBackground": "20",
-						"editor.selectionHighlightBackground": "20",
-						"editor.selectionHighlightBorder": "",
-						"editorBracketMatch.border": "",
-						"editorCursor.foreground": "60",
-						"editorGroup.dropBackground": "10",
-						"editorGroupHeader.tabsBackground": "10",
-						"editorIndentGuide.background": "10",
-						"editorLineNumber.activeForeground": "70",
-						"editorLink.activeForeground": "70",
-						"notificationLink.foreground": "",
-						"focusBorder": "30",
-						"list.activeSelectionBackground": "20",
-						"list.highlightForeground": "",
-						"list.hoverBackground": "15",
-						"list.inactiveSelectionBackground": "15",
-						"menu.background": "10",
-						"menu.selectionBackground": "30",
-						"merge.currentContentBackground": "15",
-						"merge.currentHeaderBackground": "30",
-						"panelTitle.activeForeground": "60",
-						"progressBar.background": "",
-						"scrollbarSlider.activeBackground": "",
-						"scrollbarSlider.background": "20",
-						"scrollbarSlider.hoverBackground": "30",
-						"searchEditor.findMatchBackground": "25",
-						"selection.background": "20",
-						"settings.focusedRowBackground": "5",
-						"settings.focusedRowBorder": "20",
-						"settings.modifiedItemIndicator": "",
-						"settings.rowHoverBackground": "5",
-						"sideBar.background": "5",
-						"sideBar.border": "0",
-						"sideBarTitle.foreground": "60",
-						"statusBar.background": "",
-						"statusBar.noFolderBackground": "",
-						"symbolIcon.arrayForeground": "",
-						"symbolIcon.constructorForeground": "70",
-						"symbolIcon.functionForeground": "70",
-						"symbolIcon.methodForeground": "",
-						"symbolIcon.moduleForeground": "",
-						"symbolIcon.variableForeground": "60",
-						"tab.activeBackground": "20",
-						"tab.activeBorder": "",
-						"tab.activeModifiedBorder": "",
-						"tab.border": "20",
-						"tab.hoverBackground": "15",
-						"tab.inactiveBackground": "10",
-						"tab.inactiveModifiedBorder": "",
-						"terminal.foreground": "60",
-						"terminal.selectionBackground": "20",
-						"terminalCursor.foreground": "",
-						"textLink.foreground": "",
-						"textLink.activeForeground": "+10",
-						"titleBar.activeBackground": "15",
-						"toolbar.hoverBackground": "0",
-						"window.activeBorder": "-10"
-					},
+					"default": {},
 					"description": "Set vsCode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness"
+				},
+				"theme-changer.settings.overrideDefaultColorRange": {
+					"type": "boolean",
+					"default": false,
+					"description": "Set to true if you want to override the default Color Range Customizations"
 				}
 			}
 		},
@@ -220,8 +157,7 @@
 		"vscode-test": "^1.5.2"
 	},
 	"dependencies": {
-		"@types/lodash": "^4.14.172",
-		"color": "^4.0.1",
-		"lodash": "^4.17.21"
+		"@vscode/webview-ui-toolkit": "^0.8.1",
+		"color": "^4.0.1"
 	}
 }

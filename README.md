@@ -1,32 +1,35 @@
 # Theme Changer
 
-Generate your favorite VSCode workbench Theme color Customizations
+This extensions helps to save your favorite Theme color and generates the `workbench.colorCustomizations` colors from the selected theme color. All generated theme colors will be in the selected theme color shade.
 
-![Theme Changer](./images/Theme_Changer.gif)
+![Theme Changer](./images/preview.gif)
 
 ## Features
 
-This extensions helps to save your favorite Theme primary color and generates the `workbench.colorCustomizations` colors from the selected primary theme color.
+- Add your favorite theme color
+- Generate vscode theme colors for both user and workspace settings
+- Sidebar webview view is available
+- Click on the color pallet icon on the status bar to set the vscode to next favorite theme color
+- Fully customizable
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-- `theme-changer.settings.path`: set the `settings.json` file path. It can be either user settings or workspace settings file path.
-  - `Default` is set to `'.vscode/settings.json'`
-- `theme-changer.settings.theme`: give the theme name to generate the colors.
-  - `Default` is set to `'Default Dark+'`
-- `theme-changer.settings.colors`: add your favorite theme colors here.
-  - `Default` colors are `["#FF1A66","#9C27B0","#007ACC","#388E3C","#CC7E00","#CC5200","#CC0000"]`
-- `theme-changer.settings.colorCustomizations` - helps to set your color customizations lightness.
-  - `Default` colorCustomizations
+- `theme-changer.settings.setAsUserTheme` - Set to true to update the theme color in user settings else it sets to the workspace folder settings.
+- `theme-changer.settings.theme:'Default Dark+'`: Provide theme name to generate the Theme Colors, Leave it empty to generate as a global theme
+- `theme-changer.settings.colors: [ "#007ACC", "#008006", "#6C0080", "#CC5200", "#CC7E00", "#4D4D4D" ]`: add your favorite theme colors here.
+- `theme-changer.settings.colorRangeCustomizations` - Set vsCode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness.
+- `theme-changer.settings.overrideDefaultColorRange` - Set to true if you want to override the default Color Range Customizations
+
+Default colorRangeCustomizations :
 
 ```json
 {
   "activityBar.activeBackground": "15",
-  "activityBar.activeBorder": "",
+  "activityBar.activeBorder": "50",
   "activityBar.background": "5",
-  "activityBar.dropBorder": "",
+  "activityBar.dropBorder": "50",
   "activityBarBadge.background": "",
   "badge.background": "",
   "breadcrumb.activeSelectionForeground": "60",
@@ -40,8 +43,8 @@ This extension contributes the following settings:
   "editor.lineHighlightBackground": "15",
   "editor.selectionBackground": "20",
   "editor.selectionHighlightBackground": "20",
-  "editor.selectionHighlightBorder": "",
-  "editorBracketMatch.border": "",
+  "editor.selectionHighlightBorder": "50",
+  "editorBracketMatch.border": "50",
   "editorCursor.foreground": "60",
   "editorGroup.dropBackground": "10",
   "editorGroupHeader.tabsBackground": "10",
@@ -81,8 +84,8 @@ This extension contributes the following settings:
   "symbolIcon.moduleForeground": "",
   "symbolIcon.variableForeground": "60",
   "tab.activeBackground": "20",
-  "tab.activeBorder": "",
-  "tab.activeModifiedBorder": "",
+  "tab.activeBorder": "50",
+  "tab.activeModifiedBorder": "50",
   "tab.border": "20",
   "tab.hoverBackground": "15",
   "tab.inactiveBackground": "10",
@@ -90,21 +93,22 @@ This extension contributes the following settings:
   "terminal.foreground": "60",
   "terminal.selectionBackground": "20",
   "terminalCursor.foreground": "",
-  "textLink.foreground": "",
-  "textLink.activeForeground": "+10",
+  "textLink.foreground": "50",
+  "textLink.activeForeground": "65",
   "titleBar.activeBackground": "15",
   "toolbar.hoverBackground": "0",
-  "window.activeBorder": "-10"
+  "window.activeBorder": "30"
 }
 ```
 
-You can adjust the lightness to get the darker and lighter shade of the Theme color from the settings `theme-changer.settings.colorCustomizations`
+You can adjust the lightness to get the darker and lighter shade of the Theme color from the settings `theme-changer.settings.colorRangeCustomizations`
 
 - You can adjust the lightness from `0` to `100` to get the shades.
 - `'+10'` or `'-10'` - Helps to increment or decrement the lightness by `10%` from the selected Theme Color.
 - Incrementing value will gives you the lighter shade and Decrementing value will gives you the darked shade of the selected color.
 - `'50'` - You can also directly set the lightness without incrementing or decrementing the selected color.
-- `'0'` - give you the black color and `'100'` gives you the white color.
+- `'0'` - give you the black color.
+- `'100'` gives you the white color.
 - `''` - leaving it empty will use the actual lightness of the selected color.
 
 **Enjoy!**
