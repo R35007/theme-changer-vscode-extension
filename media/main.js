@@ -13,6 +13,7 @@ const vsCodeMessageReceiveHandler = () => {
                 clearColors();
                 break;
             case 'updateColors':
+                colors = data.colors;
                 updateColorsList(data.colors);
                 break;
 
@@ -40,11 +41,11 @@ const updateColorsList = (colors) => {
     const ul = document.getElementById("color-list");
     const colorsList = colors.map(getColorNode)
     ul.innerHTML = colorsList.join('');
-    addEventListeners();
+    addColorsEventListeners();
 }
 
-const addEventListeners = () => {
-    // on Color picker color change handler
+const addColorsEventListeners = () => {
+    // On Color picker color change handler
     document.querySelectorAll(".color-picker").forEach(item => {
         item.addEventListener('change', event => {
             const value = event?.target?.value?.toUpperCase();
@@ -72,29 +73,6 @@ const addEventListeners = () => {
     document.querySelectorAll(".color-remove-btn").forEach(item => {
         item.addEventListener('click', event => removeColor(event?.target?.dataset?.index))
     })
-
-    // On Add Color Button Click handler
-    document.getElementById('color-add-btn').addEventListener('click', addColor);
-
-    // On Set as User Theme Checkbox check
-    document.getElementById('user-theme-checkbox').addEventListener('change', function () { setAsUserTheme(this.checked) });
-
-    // Reset to Vscode Default Theme - Clears all generated theme colors
-    document.getElementById('reset-link').addEventListener('click', function (event) {
-        event.preventDefault();
-        resetTheme()
-    });
-}
-
-// Clear all generated Theme Colors
-const resetTheme = () => {
-    console.log("Reset Theme clicked");
-    vscode.postMessage({ type: 'reset-theme' });
-}
-
-// Set as User Theme
-const setAsUserTheme = (isUserTheme) => {
-    vscode.postMessage({ type: 'is-user-theme', value: isUserTheme });
 }
 
 // Clear All Colors
@@ -122,9 +100,8 @@ const updateColor = (index, value) => {
 
 // Select Color
 const selectColor = (index) => {
-    vscode.postMessage({ type: 'colorSelected', value: colors[index] });
+    vscode.postMessage({ type: 'color-selected', value: colors[index] });
 }
-
 
 // Add a Random Color
 const addColor = () => {
@@ -134,8 +111,37 @@ const addColor = () => {
     vscode.postMessage({ type: 'colors-list-update', value: colors });
 }
 
+const addActionListener = () => {
+    // On Add Color Button Click handler
+    document.getElementById('color-add-btn').addEventListener('click', addColor);
+
+    // On Set as User Theme Checkbox check
+    document.getElementById('user-theme-checkbox').addEventListener('change', function () {
+        vscode.postMessage({ type: 'is-user-theme', value: this.checked });
+    });
+
+    // Reset to Vscode Default Theme - Clears all generated theme colors
+    document.getElementById('reset-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        vscode.postMessage({ type: 'reset-theme' });
+    });
+
+    // Set Theme Name to generate the theme colors
+    document.getElementById('theme-name-textbox').addEventListener('change', event => {
+        const value = event?.target?.value;
+        vscode.postMessage({ type: 'set-theme-name', value });
+    });
+
+    // Set Theme
+    document.getElementById('theme-dropdown').addEventListener('change', event => {
+        const value = event?.target?.value;
+        vscode.postMessage({ type: 'set-theme', value });
+    });
+}
+
 const init = (_colors) => {
     colors = _colors;
     vsCodeMessageReceiveHandler();
     updateColorsList(colors);
+    addActionListener();
 }

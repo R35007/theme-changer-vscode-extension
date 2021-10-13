@@ -1,164 +1,192 @@
 {
-	"name": "theme-changer",
-	"displayName": "Theme Changer",
-	"description": "Generate your favorite VSCode workbench Theme color Customizations",
-	"version": "3.0.0",
-	"publisher": "Thinker",
-	"license": "MIT",
-	"icon": "images/theme-changer-logo.png",
-	"author": {
-		"name": "Sivaraman",
-		"email": "sendmsg2siva@gmail.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/R35007/theme-changer-vscode-extension"
-	},
-	"engines": {
-		"vscode": "^1.60.0"
-	},
-	"keywords": [
-		"Theme Changer",
-		"Theme editor",
-		"Dynamic Theme",
-		"Theme color",
-		"vscode theme changer",
-		"color customizations",
-		"colorCustomizations",
-		"dynamic color customizations",
-		"dynamic theme changer"
-	],
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "sidebar-colorsView",
-					"title": "Theme Changer",
-					"icon": "images/theme-changer.svg"
-				}
-			]
-		},
-		"views": {
-			"sidebar-colorsView": [
-				{
-					"type": "webview",
-					"id": "themeChanger.sidebar-colorsView",
-					"name": "Theme Changer"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "themeChanger.addColor",
-				"category": "Theme Changer",
-				"title": "Add Color"
-			},
-			{
-				"command": "themeChanger.clearColors",
-				"category": "Theme Changer",
-				"title": "Clear Colors",
-				"icon": "$(clear-all)"
-			},
-			{
-				"command": "themeChanger.changeThemeColor",
-				"category": "Theme Changer",
-				"title": "Change Theme Color"
-			},
-			{
-				"command": "themeChanger.resetTheme",
-				"category": "Theme Changer",
-				"title": "Reset Theme to VSCode Default"
-			}
-		],
-		"configuration": {
-			"title": "Theme Changer",
-			"properties": {
-				"theme-changer.settings.setAsUserTheme": {
-					"type": "boolean",
-					"default": true,
-					"description": "Set to true to update the theme color in user settings else it sets to the workspace folder settings."
-				},
-				"theme-changer.settings.color": {
-					"type": "string",
-					"description": "Sets current selected Color here."
-				},
-				"theme-changer.settings.colors": {
-					"type": "array",
-					"default": [
-						"#007ACC",
-						"#008006",
-						"#6C0080",
-						"#CC5200",
-						"#CC7E00",
-						"#4D4D4D"
-					],
-					"items": {
-						"type": "string"
-					},
-					"additionalItems": true,
-					"description": "Add your Favorite Theme Colors here."
-				},
-				"theme-changer.settings.theme": {
-					"type": "string",
-					"default": "Default Dark+",
-					"description": "Provide theme name to generate the Theme Colors, Leave it empty to generate as a global theme."
-				},
-				"theme-changer.settings.colorRangeCustomizations": {
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					},
-					"default": {},
-					"description": "Set vsCode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness"
-				},
-				"theme-changer.settings.overrideDefaultColorRange": {
-					"type": "boolean",
-					"default": false,
-					"description": "Set to true if you want to override the default Color Range Customizations"
-				}
-			}
-		},
-		"menus": {
-			"view/title": [
-				{
-					"command": "themeChanger.clearColors",
-					"group": "navigation",
-					"when": "view == themeChanger.sidebar-colorsView"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.2.2",
-		"@types/node": "14.x",
-		"@types/vscode": "^1.60.0",
-		"@typescript-eslint/eslint-plugin": "^4.26.0",
-		"@typescript-eslint/parser": "^4.26.0",
-		"eslint": "^7.27.0",
-		"glob": "^7.1.7",
-		"mocha": "^9.1.2",
-		"typescript": "^4.3.2",
-		"lodash-es": "^4.17.21",
-		"vscode-test": "^1.5.2"
-	},
-	"dependencies": {
-		"@vscode/webview-ui-toolkit": "^0.8.1",
-		"color": "^4.0.1"
-	}
+  "name": "theme-changer",
+  "displayName": "Theme Changer",
+  "description": "Generate your favorite VSCode workbench Theme color Customizations",
+  "version": "4.0.0",
+  "publisher": "Thinker",
+  "license": "MIT",
+  "icon": "images/theme-changer-logo.png",
+  "author": {
+    "name": "Sivaraman",
+    "email": "sendmsg2siva@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/R35007/theme-changer-vscode-extension"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "keywords": [
+    "Theme Changer",
+    "Theme editor",
+    "Dynamic Theme",
+    "Theme color",
+    "vscode theme changer",
+    "color customizations",
+    "colorCustomizations",
+    "dynamic color customizations",
+    "dynamic theme changer"
+  ],
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sidebar-colorsView",
+          "title": "Theme Changer",
+          "icon": "images/theme-changer.svg"
+        }
+      ]
+    },
+    "views": {
+      "sidebar-colorsView": [
+        {
+          "type": "webview",
+          "id": "themeChanger.sidebar-colorsView",
+          "name": "Theme Changer"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "themeChanger.addColor",
+        "category": "Theme Changer",
+        "title": "Add Color"
+      },
+      {
+        "command": "themeChanger.clearColors",
+        "category": "Theme Changer",
+        "title": "Clear Colors",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "themeChanger.changeThemeColor",
+        "category": "Theme Changer",
+        "title": "Change Theme Color"
+      },
+      {
+        "command": "themeChanger.resetTheme",
+        "category": "Theme Changer",
+        "title": "Reset Theme to VSCode Default"
+      },
+      {
+        "command": "themeChanger.resetColors",
+        "category": "Theme Changer",
+        "title": "Reset All colors",
+        "icon": "$(discard)"
+      }
+    ],
+    "configuration": {
+      "title": "Theme Changer",
+      "properties": {
+        "theme-changer.settings.setAsUserTheme": {
+          "type": "boolean",
+          "default": true,
+          "description": "Set to true to update the theme color in user settings else it sets to the workspace folder settings."
+        },
+        "theme-changer.settings.color": {
+          "type": "string",
+          "description": "Sets current selected Color here."
+        },
+        "theme-changer.settings.colors": {
+          "type": "array",
+          "default": [
+            "#005C99",
+            "#6C0080",
+            "#CC5200",
+            "#CC7E00",
+            "#4D4D4D"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "additionalItems": true,
+          "description": "Add your Favorite Theme Colors here."
+        },
+        "theme-changer.settings.themeName": {
+          "type": "string",
+          "default": "Default Dark+",
+          "description": "Provide theme name to generate the theme colors, Leave it empty to generate as a global theme."
+        },
+        "theme-changer.settings.theme": {
+          "type": "string",
+          "default": "Dynamite",
+          "enum": [
+            "Dynamite",
+            "Dynamite High Contrast"
+          ],
+          "description": "Provide theme name to generate the theme colors, Leave it empty to generate as a global theme."
+        },
+        "theme-changer.settings.colorRangeCustomizations": {
+          "type": "object",
+          "default": {},
+          "examples": [
+            {
+              "button.background": "",
+              "button.hoverBackground": "+10",
+              "settings.headerForeground": "-5",
+              "badge.background": "50",
+              "editor.background": "0",
+              "statusBar.foreground": "100",
+              "terminal.background": "#181818"
+            }
+          ],
+          "markdownDescription": "Set vscode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness.\n\n \n\nExample : Theme Color `#CC5200`\n\n \n\n ```jsonc\n {\n\t\"button.background\": \"\", // If its empty it uses the exact Theme color -> #CC5200\n\t\"button.hoverBackground\": \"+10\", // Increments Theme color lghtness by 10% and becomes lighter shade -> #FF6700\n\t\"settings.headerForeground\": \"-5\", // Decrements Theme color lightness by 5% and becomes darker shade -> #E65C00\n\t\"badge.background\": \"50\", // Directly sets the lightnes to 50% of the Theme color -> #FF6700\n\t\"editor.background\": \"0\", // Becomes Black color => #000000\n\t\"statusBar.foreground\": \"100\", // Becomes White color => #ffffff\n\t\"terminal.background\": \"#181818\" // Overrides the Theme color and uses the given color\n}\n```"
+        },
+        "theme-changer.settings.overrideDefaultColorRange": {
+          "type": "boolean",
+          "default": false,
+          "description": "Set to true if you want to override the default Color Range Customizations"
+        }
+      }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "themeChanger.clearColors",
+          "group": "navigation",
+          "when": "view == themeChanger.sidebar-colorsView"
+        },
+        {
+          "command": "themeChanger.resetColors",
+          "group": "navigation",
+          "when": "view == themeChanger.sidebar-colorsView"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.2",
+    "typescript": "^4.3.2",
+    "lodash-es": "^4.17.21",
+    "vscode-test": "^1.5.2"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^0.8.1",
+    "color": "^4.0.1"
+  }
 }
