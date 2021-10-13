@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { Action, Theme, WebViewAPIMessage } from './constant.enum.modal';
 import { COLORS_VIEW } from './enum';
 import { Settings } from './Settings';
 import { ThemeChanger } from './theme-changer';
@@ -6,13 +7,18 @@ import { ThemeChanger } from './theme-changer';
 export class SidebarColorsView implements vscode.WebviewViewProvider {
   public static readonly viewType = COLORS_VIEW;
 
+  themes = [
+    { id: 1, label: Theme.DYNAMITE, value: Theme.DYNAMITE },
+    { id: 2, label: Theme.DYNAMITE_HIGH_CONTRAST, value: Theme.DYNAMITE_HIGH_CONTRAST },
+  ];
+
   private _view?: vscode.WebviewView;
 
-  constructor(private readonly _extensionUri: vscode.Uri, private themeChanger: ThemeChanger) {}
+  constructor(private readonly _extensionUri: vscode.Uri, private themeChanger: ThemeChanger) { }
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
-    context: vscode.WebviewViewResolveContext,
+    _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
     this._view = webviewView;
@@ -30,33 +36,44 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
       }
     });
 
-    webviewView.webview.onDidReceiveMessage((data) => {
-      switch (data.type) {
-        case 'colorSelected': {
-          this.setColor(data.value?.toUpperCase());
-          break;
-        }
-        case 'colors-list-update': {
-          this.setColors(data.value);
-          break;
-        }
-        case 'is-user-theme': {
-          Settings.isUserTheme = data.value;
-          break;
-        }
-        case 'reset-theme': {
-          this.resetTheme();
-          break;
-        }
+    webviewView.webview.onDidReceiveMessage(this.onDidReceiveMessage);
+  }
+
+  // On receive any message from webview. 
+  private onDidReceiveMessage = (data: WebViewAPIMessage) => {
+    switch (data.type) {
+      case Action.COLOR_SELECTED: {
+        this.setColor(data.value?.toUpperCase());
+        break;
       }
-    });
+      case Action.COLORS_LIST_UPDATE: {
+        this.setColors(data.value);
+        break;
+      }
+      case Action.IS_USER_THEME: {
+        Settings.isUserTheme = data.value;
+        break;
+      }
+      case Action.RESET_THEME: {
+        this.resetTheme();
+        break;
+      }
+      case Action.SET_THEME: {
+        Settings.theme = data.value;
+        break;
+      }
+      case Action.SET_THEME_NAME: {
+        Settings.themeName = data.value;
+        break;
+      }
+    }
   }
 
   private setColor(color: string) {
     try {
       this.themeChanger.changeTheme(color);
       Settings.color = color;
-      this?._view?.webview.postMessage({ type: 'updateColors', color, colors: Settings.colors });
+      this?._view?.webview.postMessage({ type: 'updateColors', colors: Settings.colors });
       vscode.window.showInformationMessage('Theme Color Changed');
     } catch (err: any) {
       vscode.window.showErrorMessage(err.message);
@@ -66,6 +83,19 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
   private setColors(colors: string[]) {
     const updatedColors = colors?.map((color: any) => color.toUpperCase());
     Settings.colors = updatedColors;
+  }
+
+  public resetColors() {
+    const colors = [
+      "#005C99",
+      "#6C0080",
+      "#CC5200",
+      "#CC7E00",
+      "#4D4D4D"
+    ];
+    Settings.colors = colors;
+    this?._view?.webview.postMessage({ type: 'updateColors', colors });
+    vscode.window.showInformationMessage('Theme Colors are resetted');
   }
 
   public changeThemeColor() {
@@ -101,17 +131,17 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
   public resetTheme() {
     const existingThemeColors = Settings.colorCustomizations;
 
-    if (Settings.theme) {
+    if (Settings.themeName) {
       Settings.colorCustomizations = {
         ...existingThemeColors,
-        [`[${Settings.theme}]`]: {},
+        [`[${Settings.themeName}]`]: {},
       };
     } else {
       Settings.colorCustomizations = {};
     }
 
     Settings.color = '';
-    vscode.window.showInformationMessage('Theme color resetted');
+    vscode.window.showInformationMessage('Resetted to vscode defaults');
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
@@ -132,6 +162,10 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
     // Use a nonce to only allow a specific script to be run.
     const nonce = getNonce();
 
+    const themesOptions = this.themes.map(theme =>
+      `<vscode-option ${Settings.theme === theme.value ? 'Selected' : ''} value="${theme.value}">${theme.label}</vscode-option>`
+    ).join('')
+
     return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -142,21 +176,28 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
 					and only allow scripts that have a specific nonce.
 				-->
 
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
-          webview.cspSource
-        }; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource
+      }; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
 				<link href="${styleMainUri}" rel="stylesheet">
         <script type="module" src="${toolkitUri}" nonce="${nonce}"></script>
 				<title>Cat Colors</title>
       </head>
       <body>
-        <vscode-checkbox id="user-theme-checkbox" ${
-          Settings.isUserTheme ? 'checked' : ''
-        }>Set as User Theme</vscode-checkbox>
+        <p class="d-flex align-items-center">
+          <span class="mr-3">Theme</span>
+          <vscode-dropdown class="flex-1" id="theme-dropdown">
+            ${themesOptions}
+          </vscode-dropdown>
+        </p>
 				<ul id="color-list" class="color-list">
 				</ul>
         <vscode-button appearance="primary" class="text-center d-block color-add-btn" id="color-add-btn">Add Color</vscode-button>
         <vscode-link href="#" id="reset-link" class="reset-link">Reset to vscode default</vscode-link>
+        <p>
+          Provide theme name to generate the theme colors, Leave it empty to generate as a global theme.
+        </p>
+        <vscode-text-field id="theme-name-textbox"  class="w-100" value="${Settings.themeName}"></vscode-text-field>
+        <vscode-checkbox id="user-theme-checkbox" ${Settings.isUserTheme ? 'checked' : ''}>Set as User Theme</vscode-checkbox>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 				<script nonce="${nonce}">
           init(${JSON.stringify(Settings.colors)})

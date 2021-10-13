@@ -17,87 +17,24 @@ This extensions helps to save your favorite Theme color and generates the `workb
 This extension contributes the following settings:
 
 - `theme-changer.settings.setAsUserTheme` - Set to true to update the theme color in user settings else it sets to the workspace folder settings.
-- `theme-changer.settings.theme:'Default Dark+'`: Provide theme name to generate the Theme Colors, Leave it empty to generate as a global theme
-- `theme-changer.settings.colors: [ "#007ACC", "#008006", "#6C0080", "#CC5200", "#CC7E00", "#4D4D4D" ]`: add your favorite theme colors here.
+- `theme-changer.settings.theme:'Dynamite'`: Set Theme Name to generate colors.
+- `theme-changer.settings.themeName:'Default Dark+'`: Provide theme name to generate the Theme Colors, Leave it empty to generate as a global theme.
+- `theme-changer.settings.colors: [ "#005C99", "#6C0080", "#CC5200", "#CC7E00", "#4D4D4D" ]`: add your favorite theme colors here.
 - `theme-changer.settings.colorRangeCustomizations` - Set vsCode style attributes and its color lightness from 0 to 100. give + or - to increment or decrement the current color lightness.
 - `theme-changer.settings.overrideDefaultColorRange` - Set to true if you want to override the default Color Range Customizations
 
-Default colorRangeCustomizations :
+Example colorRangeCustomizations :
 
-```json
+```jsonc
+// Theme Color #CC5200
 {
-  "activityBar.activeBackground": "15",
-  "activityBar.activeBorder": "50",
-  "activityBar.background": "5",
-  "activityBar.dropBorder": "50",
-  "activityBarBadge.background": "",
-  "badge.background": "",
-  "breadcrumb.activeSelectionForeground": "60",
-  "breadcrumb.focusForeground": "60",
-  "button.background": "",
-  "button.hoverBackground": "+10",
-  "editor.background": "0",
-  "editor.findMatchBackground": "40",
-  "editor.findMatchHighlightBackground": "25",
-  "editor.inactiveSelectionBackground": "20",
-  "editor.lineHighlightBackground": "15",
-  "editor.selectionBackground": "20",
-  "editor.selectionHighlightBackground": "20",
-  "editor.selectionHighlightBorder": "50",
-  "editorBracketMatch.border": "50",
-  "editorCursor.foreground": "60",
-  "editorGroup.dropBackground": "10",
-  "editorGroupHeader.tabsBackground": "10",
-  "editorIndentGuide.background": "10",
-  "editorLineNumber.activeForeground": "70",
-  "editorLink.activeForeground": "70",
-  "notificationLink.foreground": "",
-  "focusBorder": "30",
-  "list.activeSelectionBackground": "20",
-  "list.highlightForeground": "",
-  "list.hoverBackground": "15",
-  "list.inactiveSelectionBackground": "15",
-  "menu.background": "10",
-  "menu.selectionBackground": "30",
-  "merge.currentContentBackground": "15",
-  "merge.currentHeaderBackground": "30",
-  "panelTitle.activeForeground": "60",
-  "progressBar.background": "",
-  "scrollbarSlider.activeBackground": "",
-  "scrollbarSlider.background": "20",
-  "scrollbarSlider.hoverBackground": "30",
-  "searchEditor.findMatchBackground": "25",
-  "selection.background": "20",
-  "settings.focusedRowBackground": "5",
-  "settings.focusedRowBorder": "20",
-  "settings.modifiedItemIndicator": "",
-  "settings.rowHoverBackground": "5",
-  "sideBar.background": "5",
-  "sideBar.border": "0",
-  "sideBarTitle.foreground": "60",
-  "statusBar.background": "",
-  "statusBar.noFolderBackground": "",
-  "symbolIcon.arrayForeground": "",
-  "symbolIcon.constructorForeground": "70",
-  "symbolIcon.functionForeground": "70",
-  "symbolIcon.methodForeground": "",
-  "symbolIcon.moduleForeground": "",
-  "symbolIcon.variableForeground": "60",
-  "tab.activeBackground": "20",
-  "tab.activeBorder": "50",
-  "tab.activeModifiedBorder": "50",
-  "tab.border": "20",
-  "tab.hoverBackground": "15",
-  "tab.inactiveBackground": "10",
-  "tab.inactiveModifiedBorder": "",
-  "terminal.foreground": "60",
-  "terminal.selectionBackground": "20",
-  "terminalCursor.foreground": "",
-  "textLink.foreground": "50",
-  "textLink.activeForeground": "65",
-  "titleBar.activeBackground": "15",
-  "toolbar.hoverBackground": "0",
-  "window.activeBorder": "30"
+  "button.background": "", // If its empty it uses the exact Theme color -> #CC5200
+  "button.hoverBackground": "+10", // Increments Theme color lghtness by 10% and becomes lighter shade -> #FF6700
+  "settings.headerForeground": "-5", // Decrements Theme color lightness by 5% and becomes darker shade -> #E65C00
+  "badge.background": "50", // Directly sets the lightnes to 50% of the Theme color -> #FF6700
+  "editor.background": "0", // Becomes Black color => #000000
+  "statusBar.foreground": "100", // Becomes White color => #ffffff
+  "terminal.background": "#181818" // Overrides the Theme color and uses the given color
 }
 ```
 

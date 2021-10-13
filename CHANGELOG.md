@@ -1,10 +1,14 @@
 # Change Log
 
+## v4.0.0
+
+- implemented `Dynamite` and `Dynamite High Contrast` Theme colors.
+
 ## v3.0.0
 
- - Updated the webview sidebar view with [vscode-webview-ui-toolkit](https://github.com/microsoft/vscode-webview-ui-toolkit/blob/main/src/text-field/README.md)
- - added `themeChanger.resetTheme` command - This helps to reset the vscode default theme colors. In shorter it clears all the generated theme colors.
- - renamed `theme-changer.settings.setAsGlobalTheme` to `theme-changer.settings.setAsUserTheme`
+- Updated the webview sidebar view with [vscode-webview-ui-toolkit](https://github.com/microsoft/vscode-webview-ui-toolkit/blob/main/src/text-field/README.md)
+- added `themeChanger.resetTheme` command - This helps to reset the vscode default theme colors. In shorter it clears all the generated theme colors.
+- renamed `theme-changer.settings.setAsGlobalTheme` to `theme-changer.settings.setAsUserTheme`
 
 ## v2.0.0
 

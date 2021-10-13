@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { KeyValString, Theme } from './constant.enum.modal';
 
 export class Settings {
   static get workbench() {
@@ -39,29 +40,30 @@ export class Settings {
     Settings.setThemeChangerSetttings('color', value);
   }
   static get colors() {
-    return (
-      (Settings.getThemeChangerSetttings('colors') as string[]) || [
-        '#FF6700',
-        '#D52B1E',
-        '#3DC2FF',
-        '#9C2780',
-        '#3F5185',
-      ]
-    );
+    return Settings.getThemeChangerSetttings('colors') as string[];
   }
   static set colors(value: string[]) {
-    Settings.setThemeChangerSetttings('colors', value) || '#FF6700';
+    Settings.setThemeChangerSetttings('colors', value);
   }
   static get colorRangeCustomizations() {
-    return Settings.getThemeChangerSetttings('colorRangeCustomizations') as object;
+    return Settings.getThemeChangerSetttings('colorRangeCustomizations') as KeyValString;
   }
-  static set colorRangeCustomizations(value: object) {
+  static set colorRangeCustomizations(value: KeyValString) {
     Settings.setThemeChangerSetttings('colorRangeCustomizations', value);
   }
   static get overrideDefaultColorRange() {
-    return Settings.getThemeChangerSetttings('overrideDefaultColorRange') as Boolean;
+    return Settings.getThemeChangerSetttings('overrideDefaultColorRange') as boolean;
+  }
+  static get themeName() {
+    return Settings.getThemeChangerSetttings('themeName') as string;
+  }
+  static set themeName(themeName: string) {
+    Settings.setThemeChangerSetttings('themeName', themeName);
   }
   static get theme() {
-    return Settings.getThemeChangerSetttings('theme') as string;
+    return Settings.getThemeChangerSetttings('theme') as Theme;
+  }
+  static set theme(theme: Theme) {
+    Settings.setThemeChangerSetttings('theme', theme);
   }
 }
