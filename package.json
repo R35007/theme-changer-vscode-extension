@@ -2,7 +2,7 @@
   "name": "theme-changer",
   "displayName": "Theme Changer",
   "description": "Generate your favorite VSCode workbench Theme color Customizations",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "publisher": "Thinker",
   "license": "MIT",
   "icon": "images/theme-changer-logo.png",
@@ -181,12 +181,12 @@
     "eslint": "^7.27.0",
     "glob": "^7.1.7",
     "mocha": "^9.1.2",
-    "typescript": "^4.3.2",
     "lodash-es": "^4.17.21",
     "vscode-test": "^1.5.2"
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^0.8.1",
-    "color": "^4.0.1"
+    "color": "^4.0.1",
+    "typescript": "^4.4.4"
   }
 }

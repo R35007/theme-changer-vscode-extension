@@ -1,5 +1,9 @@
 # Change Log
 
+## v4.0.1
+
+- Terminal and Panel background color change in Dynamite High Contrast
+
 ## v4.0.0
 
 - implemented `Dynamite` and `Dynamite High Contrast` Theme colors.
