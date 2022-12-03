@@ -2,7 +2,7 @@
   "name": "theme-changer",
   "displayName": "Theme Changer",
   "description": "Generate your favorite VSCode workbench Theme color Customizations",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "publisher": "Thinker",
   "license": "MIT",
   "icon": "images/theme-changer-logo.png",

@@ -2,7 +2,7 @@
 
 This extensions helps to save your favorite Theme color and generates the `workbench.colorCustomizations` colors from the selected theme color. All generated theme colors will be in the selected theme color shade.
 
-![Theme Changer](./images/preview.gif)
+![Theme Changer](https://user-images.githubusercontent.com/23217228/205438387-ba43acf6-4e83-42d7-8963-dd3617445b3f.gif)
 
 ## Features
 

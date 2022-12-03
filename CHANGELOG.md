@@ -1,5 +1,10 @@
 # Change Log
 
+## v4.1.0
+
+- Reduced Build Size.
+- Terminal background and foreground color changed to default t0 vscode theme color
+
 ## v4.0.1
 
 - Terminal and Panel background color change in Dynamite High Contrast

@@ -51,8 +51,6 @@
   "statusBar.noFolderBackground": "",
   "tab.activeBorder": "50",
   "tab.activeModifiedBorder": "50",
-  "terminal.background": "#181818",
-  "terminal.foreground": "60",
   "terminal.selectionBackground": "20",
   "terminalCursor.foreground": "60",
   "textLink.activeForeground": "65",
