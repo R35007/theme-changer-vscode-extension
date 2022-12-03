@@ -33,7 +33,13 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onCommand:themeChanger.addColor",
+    "onCommand:themeChanger.clearColors",
+    "onCommand:themeChanger.changeThemeColor",
+    "onCommand:themeChanger.resetTheme",
+    "onCommand:themeChanger.resetColors",
+    "onView:sidebar-colorsView",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -149,6 +155,16 @@
       }
     },
     "menus": {
+      "commandPalette": [
+        {
+          "command": "themeChanger.addColor",
+          "when": "false"
+        },
+        {
+          "command": "themeChanger.clearColors",
+          "when": "false"
+        }
+      ],
       "view/title": [
         {
           "command": "themeChanger.clearColors",
