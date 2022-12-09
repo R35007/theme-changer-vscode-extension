@@ -29,9 +29,9 @@ Example colorRangeCustomizations :
 // Theme Color #CC5200
 {
   "button.background": "", // If its empty it uses the exact Theme color -> #CC5200
-  "button.hoverBackground": "+10", // Increments Theme color lghtness by 10% and becomes lighter shade -> #FF6700
+  "button.hoverBackground": "+10", // Increments Theme color lightness by 10% and becomes lighter shade -> #FF6700
   "settings.headerForeground": "-5", // Decrements Theme color lightness by 5% and becomes darker shade -> #E65C00
-  "badge.background": "50", // Directly sets the lightnes to 50% of the Theme color -> #FF6700
+  "badge.background": "50", // Directly sets the lightens to 50% of the Theme color -> #FF6700
   "editor.background": "0", // Becomes Black color => #000000
   "statusBar.foreground": "100", // Becomes White color => #ffffff
   "terminal.background": "#181818" // Overrides the Theme color and uses the given color

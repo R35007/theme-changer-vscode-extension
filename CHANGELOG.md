@@ -1,5 +1,9 @@
 # Change Log
 
+## v4.1.1
+
+- Build size reduced using webpack
+
 ## v4.1.0
 
 - Reduced Build Size.
@@ -23,7 +27,7 @@
 
 - removed `theme-changer.settings.settingsPath`
 - renamed `theme-changer.settings.colorCustomizations` to `theme-changer.settings.colorRangeCustomizations`
-- added `theme-changer.settings.setAsGlobalTheme` - If true it update the theme color globally else it sets to the workspacefolder
+- added `theme-changer.settings.setAsGlobalTheme` - If true it update the theme color globally else it sets to the workspace folder
 
 ## v1.0.2
 

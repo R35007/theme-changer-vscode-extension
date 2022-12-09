@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { Action, Theme, WebViewAPIMessage } from './constant.enum.modal';
 import { COLORS_VIEW } from './enum';
+import { NodeModulesAccessor, NodeModulesKeys } from './NodeModuleAccessor';
 import { Settings } from './Settings';
 import { ThemeChanger } from './theme-changer';
 
@@ -25,7 +26,10 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
 
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [this._extensionUri],
+      localResourceRoots: [
+        vscode.Uri.joinPath(this._extensionUri, NodeModulesAccessor.outputPath, 'libs'), // <--- Important
+        vscode.Uri.joinPath(this._extensionUri, 'media'),
+      ],
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
@@ -67,7 +71,7 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
         break;
       }
     }
-  }
+  };
 
   private setColor(color: string) {
     try {
@@ -152,7 +156,7 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
     const toolkitUri = webview.asWebviewUri(
       vscode.Uri.joinPath(
         this._extensionUri,
-        ...['node_modules', '@vscode', 'webview-ui-toolkit', 'dist', 'toolkit.js']
+        ...NodeModulesAccessor.getPathToOutputFile(NodeModulesKeys.uiToolkit)
       )
     );
 
@@ -164,7 +168,7 @@ export class SidebarColorsView implements vscode.WebviewViewProvider {
 
     const themesOptions = this.themes.map(theme =>
       `<vscode-option ${Settings.theme === theme.value ? 'Selected' : ''} value="${theme.value}">${theme.label}</vscode-option>`
-    ).join('')
+    ).join('');
 
     return `<!DOCTYPE html>
 			<html lang="en">
